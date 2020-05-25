@@ -3,19 +3,29 @@
 
 	public static final int IS_FULL_TIME=1;
    public static final int IS_PART_TIME=2;
-   public static final int EMP_RATE_PER_HR=20;
 
-   public static final int MAX_WORKING_DAYS=20;
-   public static final int  MAX_HRS_IN_MONTH=100;
+	private final String company;
+	private final int empRatePerHour;
+	private final int numOfWorkingDays;
+	private final int maxHoursPerMonth;
 
+	public EmpWageBuilder(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth){
+		this.company =company;
+		this.empRatePerHour=empRatePerHour;
+		this.numOfWorkingDays=numOfWorkingDays;
+		this.maxHoursPerMonth=maxHoursPerMonth;
 
-	public static int computeWage(){
+		}
+
+	public  int computeWage()
+	{
+
 
 	int empHrs=0,totalEmpHrs=0,totalWorkingDays=0;
 	int totalWorkingHrs=0;
 
-	 while(totalEmpHrs<=MAX_HRS_IN_MONTH &&
-                totalWorkingHrs<MAX_WORKING_DAYS)
+	 while(totalEmpHrs<=maxHoursPerMonth &&
+                totalWorkingHrs<numOfWorkingDays)
 	{
 
 
@@ -38,17 +48,23 @@
         totalEmpHrs+=empHrs;
 			System.out.println("Day: "+totalWorkingDays+" Emp hrs: "+empHrs);
         }
-		int totalEmpWage = totalEmpHrs*EMP_RATE_PER_HR;
+		int totalEmpWage = totalEmpHrs*empRatePerHour;
       System.out.println("Total Wage till 100 hrs and 20 Working days = "+ totalEmpWage);
 		return totalEmpWage;
 		}
 
 
+
 		public static void main( String args[])
-	{
-		computeWage();
 
+		{
 
+		EmpWageBuilder spar = new EmpWageBuilder("Spar",20,2,10);
+		EmpWageBuilder bigbasket= new EmpWageBuilder("bigbasket",25,4,20);
+		
+		System.out.println("Total Emp Wage for Company " + spar.company + " = "+spar.computeWage());
+
+		System.out.println("Total Emp Wage for Company " + bigbasket.company + " = "+bigbasket.computeWage());
 
 
 
